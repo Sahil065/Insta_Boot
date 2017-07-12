@@ -6,11 +6,6 @@ from textblob.sentiments import NaiveBayesAnalyzer
 BASIC_URL='https://api.instagram.com/v1/'
 Access_token='3524313198.b5d6b75.a998fb5b08cf46799ad976179b47bc91'
 
-print "HELLO"
-'''choice=1
-while choice!=6:
-    print "WHAT YOU WANT TO DO"
-    print "\n1.FETCH YOUR OWN DETAILS \n2.GET OWN RECENT POST \n3.GET ANOTHER USER DETAILS \n4.GET ANOTHER USER RECENT POST \n5.LIKE ANOTHER USER POST \n6.COMMENT ON A POST"
 def self_info():
     request_url=(BASIC_URL + "users/self/?access_token=%s")%(Access_token)
     print "request url is:%s"%(request_url)
@@ -26,7 +21,7 @@ def self_info():
         else:
             print "USER DOESN'T EXIST"
     else:
-        print "STATUS CODE OTHER THAN 200 IS RECIEVED"'''
+        print "STATUS CODE OTHER THAN 200 IS RECIEVED"
 
 def get_user_id(username):
     request_url=(BASIC_URL+"users/search?q=%s&access_token=%s")%(username,Access_token)
@@ -62,7 +57,7 @@ def user_info(username):
         print "STATUS CODE OTHER THAN 200 IS RECIEVED"
 
 
-'''def get_own_recent_post():
+def get_own_recent_post():
     request_url=(BASIC_URL + 'users/self/media/recent/?access_token=%s')%(Access_token)
     print request_url
     my_media=requests.get(request_url).json()
@@ -75,7 +70,7 @@ def user_info(username):
             return None
     else:
         print "STATUS CODE OTHER THAN 200 RECIEVED"
-'''
+
 
 def user_recent_media(username):
     user_id=get_user_id(username)
@@ -145,11 +140,21 @@ def existed_comment(username):
     else:
         print "STATUS CODE OTHER THAN 200 IS RECIEVED"
 
-#self_info()
-user_info("sharma.swayam")
-#get_own_recent_post()
-user_recent_media("sharma.swayam")
-#like_a_post("sharma.swayam")
-#comment_on_post("sharma.swayam")
-existed_comment("sharma.swayam")
-A,B,C=1,2,3
+
+def choice():
+    choice=1
+    while choice!=4:
+        print "\nWHAT YOU WANT TO DO"
+        print "\n1.VIEW INFORMATION \n2.VIEW POST \n3.LIKE \n4.COMMENT \n5.EXIT"
+        select=int(raw_input("ENTER YOUR CHOICE"))
+        if select==1:
+            print"\n1.VIEW YOUR OWN DETAILS \n2.VIEW OTHER USER DETAILS"
+            option=int(raw_input("ENTER YOUR CHOICE"))
+            if choice==1:
+                self_info()
+            else:
+                username=raw_input("ENTER NAME OF OTHER USER")
+                user_info(username)
+
+
+
