@@ -6,6 +6,19 @@ from textblob.sentiments import NaiveBayesAnalyzer
 BASIC_URL='https://api.instagram.com/v1/'
 Access_token='3524313198.b5d6b75.a998fb5b08cf46799ad976179b47bc91'
 
+def like_own_post():
+    media_id=get_own_recent_post()
+    request_url=(BASIC_URL + "media/%s/likes")%(media_id)
+    payload={"access_token":Access_token}
+    print "POST REQUEST TO LIKE MEDIA :%s"%(request_url)
+    like_post=requests.post(request_url,payload).json()
+    print like_post
+    if like_post['meta']['code']==200:
+        print "SUCCESSFUL"
+    else:
+        print "TRY AGAIN"
+
+
 def self_info():
     request_url=(BASIC_URL + "users/self/?access_token=%s")%(Access_token)
     print "request url is:%s"%(request_url)
@@ -94,7 +107,7 @@ def user_recent_media(username):
         print "STATUS CODE OTHER THAN 200 RECIEVED"
 
 
-def like_a_post(username):
+def like_user_post(username):
     media_id=user_recent_media(username)
     request_url=(BASIC_URL + "media/%s/likes")%(media_id)
     payload={"access_token":Access_token}
@@ -146,15 +159,38 @@ def choice():
     while choice!=4:
         print "\nWHAT YOU WANT TO DO"
         print "\n1.VIEW INFORMATION \n2.VIEW POST \n3.LIKE \n4.COMMENT \n5.EXIT"
-        select=int(raw_input("ENTER YOUR CHOICE"))
-        if select==1:
+        choice=int(raw_input("ENTER YOUR CHOICE"))
+        if choice==1:
             print"\n1.VIEW YOUR OWN DETAILS \n2.VIEW OTHER USER DETAILS"
             option=int(raw_input("ENTER YOUR CHOICE"))
-            if choice==1:
+            if option==1:
                 self_info()
-            else:
+            elif option==2:
                 username=raw_input("ENTER NAME OF OTHER USER")
                 user_info(username)
+            else:
+                print "INVALID INPUT"
 
+        elif choice==2:
+            print"\n1.VIEW YOUR OWN POST \n2.VIEW OTHER USER'S POST"
+            option = int(raw_input("ENTER YOUR CHOICE"))
+            if option == 1:
+                get_own_recent_post()
+            elif option == 2:
+                username = raw_input("ENTER NAME OF OTHER USER")
+                user_recent_media(username)
+            else:
+                print "INVALID INPUT"
 
-
+        if choice == 3:
+            print"\n1.LIKE YOUR OWN POST \n2.LIKE OTHER USER'S POST"
+            option = int(raw_input("ENTER YOUR CHOICE"))
+            if option == 1:
+                get_own_recent_post()
+            elif option == 2:
+                username = raw_input("ENTER NAME OF OTHER USER")
+                like_user_post(username)
+            else:
+                print "INVALID INPUT"
+        if choice==4:
+            existed_comment("sharma.swayam")

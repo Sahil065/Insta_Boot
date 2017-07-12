@@ -1,4 +1,4 @@
-from functions import choice
+from instabot import choice
 
 while True:
     password=raw_input()
