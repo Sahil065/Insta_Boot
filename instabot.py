@@ -270,11 +270,26 @@ def existed_user_post_comment(username):
 
 
 
-def choice():
+def start_choice():
     choice=1
+    print "\nPLEASE SELECT A USER"
+    select= int(raw_input("PLEASE SELECT A USER \n1.ls211998 \n2.samanskull \n3.sahil_singh_6315071 \n4.sharma.swayam \n5.sarabjeets45"))
+    if select==1:
+        username="ls211998"
+    elif select==2:
+        username="samanskull"
+    elif select==3:
+        username="sahil_singh_6315071"
+    elif select==4:
+        username="sharma.swayam"
+    elif select==5:
+        username="sarabjeets45"
+    else:
+        print "WRONG CHOICE"
+        start_choice()
     while choice!=4:
-        print "\nWHAT YOU WANT TO DO"
-        print "\n1.VIEW INFORMATION \n2.VIEW POST \n3.LIKE \n4.COMMENT \n5.EXIT"
+        print "\nSELECT YOUR CATEGORY"
+        print "\n1.VIEW INFORMATION \n2.VIEW POST \n3.LIKE \n4.COMMENT \n5.CHANGE USER \n6.EXIT"
         choice=int(raw_input("ENTER YOUR CHOICE"))
         if choice==1:
             print"\n1.VIEW YOUR OWN DETAILS \n2.VIEW OTHER USER DETAILS"
@@ -282,8 +297,7 @@ def choice():
             if option==1:
                 self_info()
             elif option==2:
-                username=raw_input("ENTER NAME OF OTHER USER")
-                user_info(username)
+              user_info(username)
             else:
                 print "INVALID INPUT"
 
@@ -293,7 +307,6 @@ def choice():
             if option == 1:
                 get_own_recent_post()
             elif option == 2:
-                username = raw_input("ENTER NAME OF OTHER USER")
                 user_recent_media(username)
             else:
                 print "INVALID INPUT"
@@ -304,7 +317,6 @@ def choice():
             if option == 1:
                 like_own_post()
             elif option == 2:
-                username = raw_input("ENTER NAME OF OTHER USER")
                 like_user_post(username)
             else:
                 print "INVALID INPUT"
@@ -316,15 +328,28 @@ def choice():
             if option == 1:
                 existed_self_post_comment()
             elif option == 2:
-                username = raw_input("ENTER NAME OF OTHER USER")
                 existed_user_post_comment(username)
             elif option==3:
                 comment_on_own_post()
             elif option==4:
-                username = raw_input("ENTER NAME OF OTHER USER")
                 comment_on_user_post(username)
             elif option==5:
-                user_post_piechart('ls211998')
+                intake=int(raw_input("\n1.CREATE YOUR RECENT POST PIECHART \n2.CREATE USER'S RECENT POST PIECHART"))
+                if intake==1:
+                    self_post_piechart()
+                elif intake==2:
+                    user_post_piechart(username)
+                else:
+                    print "INVALID INPUT"
 
             else:
                 print "INVALID INPUT"
+
+        elif choice==5:
+            start_choice()
+
+        elif choice==6:
+            exit("GOOD \n BYE HAVE A GOOD DAY")
+
+        else:
+            print "INVALID INPUT"
